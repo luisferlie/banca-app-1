@@ -1,13 +1,13 @@
 import enviarMensaje from "./mensajes.js";
 
 export function ingresar(user, token, e) {
-    const ingreso = Number(document.getElementById('ingreso').value)
+    const ingreso = document.getElementById('ingreso')
     const btnLogin = document.querySelector('.btn-login')
-    console.log(ingreso)
+    console.log(ingreso.value)
     const ingresarUrl = `http://localhost:4000/movements?token=${token}`
     console.log('desde ingresar', e, ingreso, user);
     const movement = {
-        amount: ingreso,
+        amount: Number(ingreso.value),
         date: new Date().toISOString()
     }
 
@@ -35,6 +35,9 @@ export function ingresar(user, token, e) {
         .catch(error => {
             console.error('Error:', error);
         });
+        ingreso.value=''
+        enviarMensaje('ingreso realizado')
+    btnLogin.click()
     btnLogin.click()
 }
 export function retirar(user, token, e) {
@@ -54,7 +57,7 @@ export function retirar(user, token, e) {
 
     const retirarUrl = `http://localhost:4000/movements?token=${token}`
     const ingresoObj = {
-        amount: -parseInt(retirada),
+        amount: -parseInt(retirada.value),
         date: new Date().toISOString()
     }
     console.log('desde retirar', e, retirada, user);
@@ -82,5 +85,8 @@ export function retirar(user, token, e) {
         .catch(error => {
             console.error('Error:', error);
         });
-    btnLogin.click()
+        enviarMensaje(`has realizado una retirada de ${retirada.value}`)
+        retirada.value =''
+        btnLogin.click()
+        btnLogin.click()
 }

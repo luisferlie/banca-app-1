@@ -207,7 +207,7 @@ function cancelarCuenta() {
   console.log(user, pin, pinIntro, userIntro)
   if (userIntro == user && pinIntro == pin) {
     enviarMensaje('se ha procedido a  cerrar tu cuenta');
-    //TODO llamada fetch para eliminar cuenta
+    
     console.log('cuenta cancelada')
   }
 }
